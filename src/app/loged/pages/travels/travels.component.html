@@ -1,0 +1,107 @@
+<!-- https://www.google.com/maps/search/?api=1&query=pablo+lorentz+1530+entre+rios+argentina -->
+<div class="logo"><img src="../../../../assets/imgs/logo.png" alt=""></div>
+<div class="contenedor-selector">
+    <mat-form-field class="selector" appearance="fill">
+        <mat-label>Select an option</mat-label>
+        <mat-select [(value)]="selected">
+            <mat-option value="viajesDisponibles">Viajes disponibles</mat-option>
+            <mat-option value="viajesAsignados">Viajes tomados</mat-option>
+            <mat-option value="viajesEnCurso">Viajes en curso</mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>
+<div>
+    <div *ngIf="(viajesDisponibles.length + viajesAsignados.length + viajesEnCurso.length) < 1">
+        <mat-card class="loading-card" *ngFor="let i of loading">
+            <mat-card-title class="loading-address"></mat-card-title>
+            <mat-card-subtitle class="loading-time"></mat-card-subtitle>
+            <mat-card-subtitle class="loading-time"></mat-card-subtitle>
+            <mat-card-content>
+                <p class="loading-content"></p>
+
+            </mat-card-content>
+            <mat-card-actions class="buttons-1">
+
+                <a class="google-maps-btn" color='primary' style="color:white" mat-flat-button disabled>
+                    Google Maps</a>
+                <button color='primary' mat-flat-button disabled>Tomar Pedido</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+
+
+    <div *ngIf='selected == "viajesDisponibles" '>
+        <mat-card class="example-card" *ngFor="let viaje of viajesDisponibles">
+            <mat-card-title>Direccion:
+                {{getAddress(viaje)}}
+            </mat-card-title>
+            <mat-card-subtitle>{{getTime(viaje)}}</mat-card-subtitle>
+            <mat-card-subtitle>Tipo de viaje: {{getRetiro(viaje)}}</mat-card-subtitle>
+            <mat-card-content>
+                <p>Equipo: {{getEquipo(viaje)}}</p>
+            </mat-card-content>
+            <mat-card-actions class="buttons-1">
+                <a target="_blank" (click)="verDireccion(viaje,viajesDisponibles)" class="google-maps-btn"
+                    color='primary' mat-flat-button>
+                    Google Maps</a>
+                <button (click)="checkIfStillListed(viaje, viajesDisponibles,viajesAsignados)" color='warn'
+                    [disabled]="(viajesAsignados.length + viajesEnCurso.length) > 2" mat-flat-button>Tomar
+                    Pedido</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+
+
+    <div *ngIf='selected == "viajesAsignados" '>
+        <mat-card class="example-card" *ngFor="let viaje of viajesAsignados">
+            <mat-card-title>Direccion:
+                {{getAddress(viaje)}}
+            </mat-card-title>
+            <mat-card-subtitle>{{getTime(viaje)}}</mat-card-subtitle>
+            <mat-card-subtitle>Tipo de viaje: {{getRetiro(viaje)}}</mat-card-subtitle>
+            <mat-card-content>
+                <p>Equipo: {{getEquipo(viaje)}}</p>
+                <p>Cliente: {{getClient(viaje)}}<br>Telefono: {{getNumber(viaje)}}</p>
+                <button class="arrow-btn" (click)='expand(viaje ,viajesAsignados)'>
+                    <mat-icon class="arrow">keyboard_arrow_down</mat-icon>
+                </button>
+                <p class="ob">{{getObservations(viaje)}}</p>
+            </mat-card-content>
+            <mat-card-actions class="buttons-2">
+                <button (click)="openDialog('Seguro que desea dar de baja el viaje ?', 'Estoy seguro' , viaje);"
+                    color='accent' mat-flat-button>Dar de baja</button>
+                <button (click)="tomarPedido(viaje, viajesAsignados, viajesEnCurso)" color='warn'
+                    mat-flat-button>Adquirido</button>
+                <a target="_blank" (click)="verDireccion(viaje,viajesAsignados)" class="google-maps-btn" color='primary'
+                    mat-flat-button>Abrir en Google Maps</a>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+
+
+    <div *ngIf='selected == "viajesEnCurso" '>
+        <mat-card class="example-card" *ngFor="let viaje of viajesEnCurso">
+            <mat-card-title>Direccion:
+                {{getAddress(viaje)}}
+            </mat-card-title>
+            <mat-card-subtitle>{{getTime(viaje)}}</mat-card-subtitle>
+            <mat-card-subtitle>Tipo de viaje: {{getRetiro(viaje)}}</mat-card-subtitle>
+            <mat-card-content>
+                <p>Equipo: {{getEquipo(viaje)}}</p>
+                <p>Cliente: {{getClient(viaje)}}<br>Telefono: {{getNumber(viaje)}}</p>
+                <button class="arrow-btn" (click)='expand(viaje ,viajesEnCurso)'>
+                    <mat-icon class="arrow">keyboard_arrow_down</mat-icon>
+                </button>
+                <p class="ob">{{getObservations(viaje)}}</p>
+            </mat-card-content>
+            <mat-card-actions class="buttons-1">
+                <a target="_blank" (click)="verDireccion(viaje,viajesEnCurso)" class="google-maps-btn" color='primary'
+                    mat-flat-button>Google Maps</a>
+                <button (click)="tomarPedido(viaje, viajesEnCurso, arrAux)" color='warn'
+                    mat-flat-button>Entregado</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+
+
+</div>

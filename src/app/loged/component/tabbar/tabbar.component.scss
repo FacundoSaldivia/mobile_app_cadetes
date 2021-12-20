@@ -1,0 +1,31 @@
+.tabbar {
+  position: fixed;
+  bottom: 0;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f3f3f3;
+  box-shadow: 5px 0px 0px 0 rgba(73, 73, 73, 0.2),
+    0 6px 20px 0 rgba(82, 82, 82, 0.19);
+
+  a {
+    margin: 0px 40px;
+
+    .mat-icon {
+      padding: 10px;
+      transform: scale(1.1);
+      transition-timing-function: ease-in;
+    }
+  }
+  a:visited {
+    text-decoration: none;
+    color: black;
+  }
+}
+.is-active {
+  transform: scale(1.2);
+  transition-timing-function: ease;
+  transition: 0.25s;
+  color: #148cd1 !important ;
+}

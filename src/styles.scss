@@ -1,1 +1,84 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use "@angular/material" as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$interfaz-cadete-primary: mat.define-palette(mat.$indigo-palette);
+$interfaz-cadete-accent: mat.define-palette(mat.$red-palette, 500, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$interfaz-cadete-warn: mat.define-palette(mat.$green-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$interfaz-cadete-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $interfaz-cadete-primary,
+      accent: $interfaz-cadete-accent,
+      warn: $interfaz-cadete-warn,
+    ),
+  )
+);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($interfaz-cadete-theme);
+
 /* You can add global styles to this file, and also import other style files */
+@font-face {
+  src: url("assets/fonts/ZillaSlab-Regular.ttf");
+  font-family: ZillaSlab;
+}
+
+html,
+body {
+  height: 97%;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-image: url("assets/imgs/bg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+@media screen and (max-width: 1024px) {
+  body {
+    background-image: url("assets/imgs/bg-3.png");
+    background-repeat: repeat;
+    background-size: cover;
+  }
+}
+
+$red: #ffbdbd;
+$blue: #6fc6f8;
+$bg-gray: #f3f3f3;
+
+.bg-green {
+  background: rgb(116, 255, 116);
+  button {
+    background: transparent;
+    color: black;
+  }
+}
+.bg-red {
+  background: rgb(255, 116, 116);
+  button {
+    background: transparent;
+    color: black;
+  }
+}
+.black {
+  color: black;
+}

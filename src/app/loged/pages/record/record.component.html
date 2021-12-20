@@ -1,0 +1,55 @@
+<div class="logo"><img src="../../../../assets/imgs/logo.png" alt=""></div>
+
+<h1 class="title">Historial de viajes completados</h1>
+<div class="container-filtro">
+    <mat-form-field class="filter" appearance="standard">
+        <mat-label>Filtro por fecha</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="ej: 2021-12-22" #input>
+    </mat-form-field>
+</div>
+<div class="cards" *ngIf="!(viajesRealizados.length > 1)">
+    <mat-card class="loading-card" *ngFor="let i of loading">
+        <mat-card-title class="loading-address"></mat-card-title>
+        <mat-card-subtitle class="loading-name"></mat-card-subtitle>
+        <mat-card-subtitle class="loading-time"></mat-card-subtitle>
+        <mat-card-content>
+            <button class="arrow-btn">
+                <mat-icon class="arrow">keyboard_arrow_down</mat-icon>
+            </button>
+        </mat-card-content>
+    </mat-card>
+</div>
+
+
+
+<div class="cards" *ngIf="viajesRealizados.length > 1">
+    <mat-card class="example-card" *ngFor="let dto of this.dataSource.filteredData">
+        <mat-card-title class="titulo">Fecha: {{getFecha(dto)}}
+        </mat-card-title>
+        <mat-card-subtitle>Cliente: {{getClient(dto)}}</mat-card-subtitle>
+        <mat-card-subtitle>Hora: {{getTime(dto)}}</mat-card-subtitle>
+        <mat-card-content>
+            <button class="arrow-btn" (click)='expand(dto ,viajesRealizados)'>
+                <mat-icon class="arrow">keyboard_arrow_down</mat-icon>
+            </button>
+            <div class="ob">
+                <p>
+                    <span style="  font-weight: 500;">Direccion:</span> {{getAddress(dto)}}
+                </p>
+                <p>
+                    <span style="  font-weight: 500;"> Hora de entrega: </span>{{getTime(dto)}}hs
+                </p>
+                <p>
+                    <span style="  font-weight: 500;"> Equipo: </span>{{getBrand(dto)}} {{getModel(dto)}}
+                </p>
+                <p>
+                    <span style="  font-weight: 500;"> Estado del viaje: </span>{{getTravelState(dto)}}
+                </p>
+                <p>
+                    <span style="  font-weight: 500;"> Observaciones: </span> {{getObservaciones(dto)}}
+                </p>
+            </div>
+        </mat-card-content>
+
+    </mat-card>
+</div>

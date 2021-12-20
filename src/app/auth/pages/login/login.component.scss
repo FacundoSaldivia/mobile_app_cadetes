@@ -1,0 +1,45 @@
+.wrapper {
+  .logo {
+    position: absolute;
+    width: 150px;
+    top: 3vh;
+  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 90vh;
+  .container-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 500px;
+
+    h1 {
+      color: black;
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    button {
+      width: 90%;
+    }
+    text-align: center;
+    .soporte {
+      margin: 5px;
+      line-height: 175%;
+    }
+  }
+}
+::ng-deep .mat-focused .mat-form-field-label {
+  /*change color of label*/
+}
+
+::ng-deep.mat-form-field-outline {
+  /*change color of underline*/
+  border-radius: 6px;
+  background-color: rgba(255, 255, 255, 0.5) !important;
+}
+
+::ng-deep.mat-form-field-ripple {
+  /*change color of underline when focused*/
+}

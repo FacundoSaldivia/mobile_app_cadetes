@@ -1,0 +1,23 @@
+<div class="wrapper">
+    <img class="logo" src="../../../../assets/imgs/logo.png" alt="">
+    <div class="container-login">
+        <h1>Iniciar Sesion</h1>
+        <form [formGroup]="form" (ngSubmit)="submit()">
+            <p>
+                <mat-form-field appearance="outline" [style.width.px]=250>
+                    <mat-label>Correo</mat-label>
+                    <input type="text" matInput formControlName="email">
+                </mat-form-field>
+            </p>
+
+            <p>
+                <mat-form-field appearance="outline" [style.width.px]=250>
+                    <mat-label>Contraseña</mat-label>
+                    <input type="password" matInput placeholder="Password" formControlName="password">
+                </mat-form-field>
+            </p>
+            <button type="submit" mat-raised-button>Iniciar Sesion</button>
+            <p class="soporte">Problemas? Contactanos</p><a href="">soporte@todoit.com</a>
+        </form>
+    </div>
+</div>
