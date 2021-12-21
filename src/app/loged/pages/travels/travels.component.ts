@@ -7,6 +7,7 @@ import {
 import { Viaje } from 'src/app/models/travel';
 import { TravelsService } from '../../services/travels.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { forkJoin } from 'rxjs';
 
 export interface DialogData {
   texto: string;
@@ -62,41 +63,23 @@ export class TravelsComponent implements OnInit {
   // Comprueba que el viaje que le pasen este en la lista (sirve para los viajes disponibles)
   checkIfStillListed(viaje: Viaje, viajes: Viaje[], viajes2: Viaje[]) {
     let check: boolean = false;
-    this.travelService.getAllAvilableRetiro().subscribe((resp) => {
-      let contador = 0;
-      resp.forEach((e) => {
-        contador = contador + 1;
+    let viaje1 = this.travelService.getAllAvilableRetiro();
+    let viaje2 = this.travelService.getAllAvilableEntrega();
+    forkJoin([viaje1, viaje2]).subscribe((resp) => {
+      let aux = [...resp[0], ...resp[1]];
+      aux.forEach((e) => {
         if (e.id == viaje.id) {
           this.tomarPedido(viaje, viajes, viajes2);
-          contador = contador - 1;
-        } else if (!check && contador == resp.length) {
           check = true;
-        } else if (check && contador == resp.length) {
-          this.openDialog(
-            'Parece que este viaje ya a sido tomado, recarga la pagina para poder actualizar la lista de viajes',
-            '',
-            viaje
-          );
         }
       });
-    });
-    this.travelService.getAllAvilableEntrega().subscribe((resp) => {
-      let contador = 0;
-      resp.forEach((e) => {
-        contador = contador + 1;
-        if (e.id == viaje.id) {
-          this.tomarPedido(viaje, viajes, viajes2);
-          contador = contador - 1;
-        } else if (!check && contador == resp.length) {
-          check = true;
-        } else if (check && contador == resp.length) {
-          this.openDialog(
-            'Parece que este viaje ya a sido tomado, recarga la pagina para poder actualizar la lista de viajes',
-            '',
-            viaje
-          );
-        }
-      });
+      if (!check) {
+        this.openDialog(
+          'Parece que este viaje ya a sido tomado, recarga la pagina para poder actualizar la lista de viajes',
+          '',
+          viaje
+        );
+      }
     });
   }
   // El cadete cancela el pedido (de 6 a 5 o 2 a 1)
