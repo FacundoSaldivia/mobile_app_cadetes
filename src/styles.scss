@@ -60,6 +60,11 @@ body {
     background-size: cover;
   }
 }
+@media screen and (min-witdh: 900px) {
+  body {
+    display: none;
+  }
+}
 
 $red: #ffbdbd;
 $blue: #6fc6f8;

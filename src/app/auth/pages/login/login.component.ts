@@ -64,6 +64,12 @@ export class LoginComponent implements OnInit {
     );
   }
 
+  loginButton(): void {
+    this.form.value.email = 'fs@email.com';
+    this.form.value.password = '123';
+    this.login(this.form);
+  }
+
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogLogin, {
       width: '350px',

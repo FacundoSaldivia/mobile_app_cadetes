@@ -1,27 +1,33 @@
 # InterfazCadete
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.0.1.
+Web app mobile para el manejo de envios de una cadeteria
 
-## Development server
+# Iniciar
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Para instalar toda las dependencias use "npm i", y para correr el proyecto utilice "npm start"
 
-## Code scaffolding
+# Usuario
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Para iniciar en el login hay un boton de invitado que logeara en la cuenta que se muestra abajo
+Usuario de prueba para la app cadete: fs@email.com, contraseña: 123
 
-## Build
+# Funcionamiento
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Esta aplicacion esta pensada para un cadete en cual necesita llevar un control de los envios que debe o puede realizar.
+Una vez logeado el usuario veras un home con un pequeño instructivo, en la pestaña de viajes veras los disponibles y cambiando select puedes ver los diferentes viajes
 
-## Running unit tests
+### Viajes disponibles
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Los viajes disponibles son aquellos que pueden ser tomados por cualquier cadete siempre y cuando no pase su limite (maximo 3)
 
-## Running end-to-end tests
+### Viajes asignados
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Los viajes asignados son aquellos que el cadete toma pero aun no lo tiene fisicamente
 
-## Further help
+### Viajes En Curso
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Los viajes en curso son aquellos cuales el cadete ya tiene de forma fisica y estan en camino a su destino
+
+## Historial
+
+Aca se muestran los viajes realizados por el cadete, posee un filtro de busqueda por fecha,nombre,etc

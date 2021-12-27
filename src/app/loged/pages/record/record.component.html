@@ -3,11 +3,11 @@
 <h1 class="title">Historial de viajes completados</h1>
 <div class="container-filtro">
     <mat-form-field class="filter" appearance="standard">
-        <mat-label>Filtro por fecha</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="ej: 2021-12-22" #input>
+        <mat-label>Busqueda</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="" #input>
     </mat-form-field>
 </div>
-<div class="cards" *ngIf="!(viajesRealizados.length > 1)">
+<div class="cards" *ngIf="!(viajesRealizados2.length > 1)">
     <mat-card class="loading-card" *ngFor="let i of loading">
         <mat-card-title class="loading-address"></mat-card-title>
         <mat-card-subtitle class="loading-name"></mat-card-subtitle>
@@ -22,31 +22,31 @@
 
 
 
-<div class="cards" *ngIf="viajesRealizados.length > 1">
-    <mat-card class="example-card" *ngFor="let dto of this.dataSource.filteredData">
-        <mat-card-title class="titulo">Fecha: {{getFecha(dto)}}
+<div class="cards" *ngIf="viajesRealizados2.length > 1">
+    <mat-card class="example-card" *ngFor="let viaje of this.dataSource.filteredData">
+        <mat-card-title class="titulo">Fecha: {{viaje.fecha}}
         </mat-card-title>
-        <mat-card-subtitle>Cliente: {{getClient(dto)}}</mat-card-subtitle>
-        <mat-card-subtitle>Hora: {{getTime(dto)}}</mat-card-subtitle>
+        <mat-card-subtitle>Cliente: {{viaje.cliente}}</mat-card-subtitle>
+        <mat-card-subtitle>Hora: {{viaje.hora}}</mat-card-subtitle>
         <mat-card-content>
-            <button class="arrow-btn" (click)='expand(dto ,viajesRealizados)'>
+            <button class="arrow-btn" (click)='expand(viaje ,viajesRealizados2)'>
                 <mat-icon class="arrow">keyboard_arrow_down</mat-icon>
             </button>
             <div class="ob">
                 <p>
-                    <span style="  font-weight: 500;">Direccion:</span> {{getAddress(dto)}}
+                    <span style="  font-weight: 500;">Direccion:</span> {{viaje.direccion}}
                 </p>
                 <p>
-                    <span style="  font-weight: 500;"> Hora de entrega: </span>{{getTime(dto)}}hs
+                    <span style="  font-weight: 500;"> Hora de entrega: </span>{{viaje.hora}}hs
                 </p>
                 <p>
-                    <span style="  font-weight: 500;"> Equipo: </span>{{getBrand(dto)}} {{getModel(dto)}}
+                    <span style="  font-weight: 500;"> Equipo: </span>{{viaje.equipo}}
                 </p>
                 <p>
-                    <span style="  font-weight: 500;"> Estado del viaje: </span>{{getTravelState(dto)}}
+                    <span style="  font-weight: 500;"> Estado del viaje: </span>{{viaje.estado}}
                 </p>
                 <p>
-                    <span style="  font-weight: 500;"> Observaciones: </span> {{getObservaciones(dto)}}
+                    <span style="  font-weight: 500;"> Observaciones: </span> {{viaje.observaciones}}
                 </p>
             </div>
         </mat-card-content>
