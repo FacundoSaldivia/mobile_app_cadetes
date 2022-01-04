@@ -10,7 +10,7 @@ export class LoginService {
 
   login(email: string, password: string): Observable<Usuario> {
     return this.http.get<Usuario>(
-      `http://logistica.asambleas.cl/api/login?email=${email}&password=${password}`
+      `/api/login?email=${email}&password=${password}`
     );
   }
 }
